@@ -16,10 +16,9 @@ Instagram.configure do |config|
   config.client_secret = secret
 end
 
-user_name = [ARGV[0]] # User ID
+user_name = ["davisherbfarms"]#[ARGV[0]] # User ID
 user_data = Instagram.user_search(user_name[0]) #Grabs their user info.
 user_id = user_data[0]["id"] #Seperates out their userID for polling.
-
 recent_media = Instagram.user_recent_media(user_id)
 
 # Print out the result
