@@ -18,6 +18,7 @@ media = []
 comments = []
 range = [*'0'..'9',*'A'..'Z',*'a'..'z']
 output_name = Array.new(50){ range.sample }.join
+again = Struct.new(:filter, :fields)
 
 # Run the configure method to communicate your credentials  - from http://hereisahand.com/using-the-instagram-api/
 Instagram.configure do |config|  
@@ -25,7 +26,7 @@ Instagram.configure do |config|
   config.client_secret = secret
 end
 
-user_name = ["rivercityhh"]#[ARGV[0]] # User ID
+user_name = ["nonasnonce"]#[ARGV[0]] # User ID
 user_data = Instagram.user_search(user_name[0]) #Grabs their user info.
 user_id = user_data[0]["id"] #Seperates out their userID for polling.
 
@@ -45,15 +46,18 @@ temp_comments_made = recent_media.each.map{|x| x['comments']['data'].each.map {|
 
 puts "\n\n#{user_name[0].capitalize}'s Instagram Feed Backup\n\n"
 
-check = wp.getPosts(:fields => {:number => '17', :name => 'rivercityhh'})
-posts = check.each.map {|x| x['post_id']}
-content = posts.each.map {|x| wp.getPost(:post_id => "#{x}")}
-text = content.each.map {|x| x['post_content']}
+#again = Struct.new(:fields)
+#some << :fields => {:post_title => 'davisherbfarms'}
+
+#check = wp.getPosts(some)
+#posts = check.each.map {|x| x['post_id']}
+#content = posts.each.map {|x| wp.getPost(:post_id => "#{x}")}
+#text = content.each.map {|x| x['post_content']}
 #a[0]['post_content'].include?(temp_post_text[0])
 
-for i in 0..(text.length-1) do
-temp_post_text.reject! {|x| text[i].include? x}
-end
+#for i in 0..(text.length-1) do
+#temp_post_text.reject! {|x| text[i].include? x}
+#end
 
 @nothing = ""
 @total = ""
@@ -96,3 +100,6 @@ end
             )  
 end
 
+
+
+#'custom_fields' => [{'key' => 'something', 'value' => 'something else'}]
